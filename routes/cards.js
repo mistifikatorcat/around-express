@@ -8,7 +8,7 @@ router.get('/cards', (req, res) => {
     .then((cards) => {
       res.send({ data: JSON.parse(cards) });
     })
-  .catch((err) => res.send(err));
+    .catch(() => res.send({ message: 'Card Not Found' }).status(500));
 });
 
-module.exports = router
+module.exports = router;

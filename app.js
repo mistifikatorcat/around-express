@@ -9,10 +9,10 @@ const app = express();
 app.use(usersRoute);
 app.use(cardsRoute);
 
-app.use('*',(req, res) => {
-  res.status(404).send({message: 'Requested resource not found'})
-})
+app.use('*', (req, res) => {
+  res.status(404).send({ message: 'Requested resource not found' });
+});
 
 app.listen(PORT, () => {
-    console.log(`Server started at port ${PORT}`);
-})
+  console.log(`Server started at port ${PORT}`);
+});
