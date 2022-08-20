@@ -3,17 +3,17 @@ const fs = require('fs').promises;
 const path = require('path');
 
 router.get('/users', (req, res) => {
-  const usersPath = path.join(__dirname, 'users.json')
+  const usersPath = path.join(__dirname, '../data/users.json')
   fs.readFile(usersPath, { encoding: 'utf8 '})
   .then((users) => {
     res.send({ data: JSON.stringify(users) });
   })
-  .catch(() => res.send({ message: 'User Not Found' }).status(500));
+  .catch((err) => res.send(err));
 });
 
-router.get('/:id', (req, res) => {
+router.get('/users/:id', (req, res) => {
   const { id } = req.params;
-  const usersPath = path.join(__dirname, 'users.json')
+  const usersPath = path.join(__dirname, '../data/users.json')
   fs.readFile(usersPath, { encoding: 'utf8 '})
   .then((users) => {
     const data = JSON.parse(JSON.stringify(users));
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
       res.send(user)
     }
   })
-  .catch(() => res.send({ message: 'User Not Found' }).status(500));
+  .catch((err) => res.send(err));
 
 })
 
