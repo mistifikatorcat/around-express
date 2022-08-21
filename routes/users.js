@@ -8,7 +8,7 @@ router.get('/users', (req, res) => {
     .then((users) => {
       res.send({ data: JSON.parse(users) });
     })
-    .catch(() => res.send({ message: 'User Not Found' }).status(500));
+    .catch(() => res.send({ message: 'An error has occurred on the server' }).status(500));
 });
 
 router.get('/users/:id', (req, res) => {
@@ -25,7 +25,7 @@ router.get('/users/:id', (req, res) => {
         res.send(foundUser);
       }
     })
-    .catch(() => res.send({ message: 'User Not Found' }).status(500));
+    .catch(() => res.send({ message: 'An error has occurred on the server' }).status(500));
 });
 
 module.exports = router;
