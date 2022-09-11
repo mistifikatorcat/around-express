@@ -25,12 +25,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser);
 
-app.use(userModel);
-app.use(cardModel);
 app.use(userRouter);
 app.use(cardRouter);
 
-app.use('/', router);
 
 app.listen(PORT, () => {
   console.log(`Server started at port ${PORT}`);
