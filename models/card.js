@@ -1,35 +1,35 @@
 const mongoose = require('mongoose');
 
 const cardSchema = new mongoose.Schema({
-  name:{
+  name: {
     type: String,
     required: true,
     minLength: [2, 'The name is too short!'],
-    maxLength: [30, 'The name is too long']
+    maxLength: [30, 'The name is too long'],
   },
-  link:{
+  link: {
     type: String,
     required: true,
     validate: {
-      validator: function(v){
+      validator(v) {
         return /(https?:\/\/[^\s]+)/.test(v);
       },
-      message: 'Please enter the valid URL'
-    }
+      message: 'Please enter the valid URL',
+    },
   },
-  owner:{
-   type: mongoose.Schema.Types.ObjectId,
-   required: true,
-   ref: 'user'
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'user',
   },
-  likes:{
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user'}],
+  likes: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     default: [],
-    ref: 'user'
+    ref: 'user',
   },
-  createdAt:{
+  createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
-module.exports = mongoose.model('card', cardSchema)
+module.exports = mongoose.model('card', cardSchema);
