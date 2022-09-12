@@ -1,5 +1,5 @@
 const Card = require('../models/card');
-const { badRequest, notFound, serverError } = require('../consts/consts');
+const { badId, notFound, serverError, badURL } = require('../consts/consts');
 
 const getAllCards = (req, res) => {
   Card.find({})
@@ -20,7 +20,7 @@ const createCard = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        badRequest();
+        badURL(res);
       }
       serverError(res);
     });
@@ -37,7 +37,7 @@ const deleteCard = (req, res) => {
     .then(() => res.status(200).send({ message: 'Card is deleted' }))
     .catch((err) => {
       if (err.name === 'CastError') {
-        badRequest(res);
+        badId(res);
       } if (err.status === 404) {
         notFound(res);
       }
@@ -62,7 +62,7 @@ const updateLikes = (req, res, operator) => {
     .then(() => res.status(200).send({ message: 'Card is updated' }))
     .catch((err) => {
       if (err.name === 'CastError') {
-        badRequest(res);
+        badId(res);
       } if (err.status === 404) {
         notFound(res);
       }

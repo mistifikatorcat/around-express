@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const { badRequest, notFound, serverError } = require('../consts/consts');
+const { badId, badURL, notFound, serverError } = require('../consts/consts');
 
 const getAllUsers = (req, res) => {
   User.find({})
@@ -22,7 +22,7 @@ const getUser = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        badRequest(res);
+        badId(res);
       }
 
       if (err.status === 404) {
@@ -41,7 +41,7 @@ const createUser = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        badRequest(res);
+        badURL(res);
       }
       serverError(res);
     });
@@ -62,9 +62,9 @@ const updateData = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        badRequest(res);
+        badId(res);
       } if (err.name === 'ValidationError') {
-        badRequest(res);
+        badURL(res);
       } if (err.status === 404) {
         notFound(res);
       }
