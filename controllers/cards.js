@@ -22,7 +22,7 @@ const createCard = (req, res) => {
       if (err.name === 'ValidationError') {
         badRequest();
       }
-      serverError();
+      serverError(res);
     });
 };
 
@@ -37,11 +37,11 @@ const deleteCard = (req, res) => {
     .then(() => res.status(200).send({ message: 'Card is deleted' }))
     .catch((err) => {
       if (err.name === 'CastError') {
-        badRequest();
+        badRequest(res);
       } if (err.status === 404) {
-        notFound();
+        notFound(res);
       }
-      serverError();
+      serverError(res);
     });
 };
 
@@ -62,11 +62,11 @@ const updateLikes = (req, res, operator) => {
     .then(() => res.status(200).send({ message: 'Card is updated' }))
     .catch((err) => {
       if (err.name === 'CastError') {
-        badRequest();
+        badRequest(res);
       } if (err.status === 404) {
-        notFound();
+        notFound(res);
       }
-      serverError();
+      serverError(res);
     });
 };
 

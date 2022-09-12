@@ -22,14 +22,14 @@ const getUser = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        badRequest();
+        badRequest(res);
       }
 
       if (err.status === 404) {
-        notFound();
+        notFound(res);
       }
 
-      serverError();
+      serverError(res);
     });
 };
 
@@ -41,9 +41,9 @@ const createUser = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        badRequest();
+        badRequest(res);
       }
-      serverError();
+      serverError(res);
     });
 };
 
@@ -62,13 +62,13 @@ const updateData = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        badRequest();
+        badRequest(res);
       } if (err.name === 'ValidationError') {
-        badRequest();
+        badRequest(res);
       } if (err.status === 404) {
-        notFound();
+        notFound(res);
       }
-      serverError();
+      serverError(res);
     });
 };
 
